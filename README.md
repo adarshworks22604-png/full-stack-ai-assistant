@@ -4,7 +4,7 @@ An AI assistant embedded in Microsoft Outlook (task pane) that helps engineers t
 It detects bug IDs in the open email, queries a bug-tracker API and a documentation search API,
 and returns a source-grounded answer. A preliminary answer appears fast; verified evidence updates it live.
 
-> **Status:** Stage 1 of 10 (repository and setup). See [Roadmap](#roadmap).
+> **Status:** Stage 2 of 10 (Outlook task pane with mock data). See [Roadmap](#roadmap).
 > All data in this repo is synthetic. Do not paste production secrets or real email into it.
 
 ## Architecture
@@ -27,11 +27,22 @@ Copy `backend/.env.example` to `backend/.env` and `frontend/.env.example` to `fr
 `VITE_*` values are public; secrets live only in the backend.
 
 ## Running locally
-Filled in as stages complete (frontend in Stage 2, backend in Stage 3, Docker in Stage 10).
+### Frontend (Stage 2)
+```bash
+cd frontend
+npm install
+cp .env.example .env.local
+npm run dev        # http://localhost:3000 (HTTPS if dev certs are installed)
+npm test           # unit + component tests
+npm run typecheck && npm run lint && npm run build
+```
+In a normal browser the app uses **synthetic sample emails** and a **mock assistant**, so you can try the full
+UI (preliminary answer, progress, sources, errors, Stop/Retry) with no backend. To use it inside Outlook, see
+[docs/outlook-addin.md](docs/outlook-addin.md). Backend (Stage 3) and Docker (Stage 10) are added later.
 
 ## Roadmap
 - [x] Stage 1 — Repository and setup
-- [ ] Stage 2 — Outlook frontend (mock email data)
+- [x] Stage 2 — Outlook frontend (mock email data)
 - [ ] Stage 3 — FastAPI backend (typed endpoints, health, mocks)
 - [ ] Stage 4 — Frontend/backend integration
 - [ ] Stage 5 — LLM integration
