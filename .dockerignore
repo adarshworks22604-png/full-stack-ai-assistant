@@ -1,0 +1,12 @@
+.git
+.github
+.env
+.env.*
+!.env.example
+**/node_modules
+**/__pycache__
+.venv
+venv
+*.log
+data/private
+docs

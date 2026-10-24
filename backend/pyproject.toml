@@ -1,0 +1,9 @@
+[project]
+name = "outlook-engineering-ai-assistant-backend"
+version = "0.1.0"
+description = "FastAPI backend for the Outlook Engineering AI Assistant"
+requires-python = ">=3.11"
+dependencies = []  # added in Stage 3; pin with a lockfile
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

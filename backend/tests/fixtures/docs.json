@@ -1,0 +1,8 @@
+[
+  {"source_id": "DOC-001", "title": "Payments Service Tuning Guide", "uri": "https://example.invalid/docs/payments-tuning",
+   "product": "payments", "version": "2.3", "updated_at": "2026-01-15",
+   "excerpt": "If requests time out under load, raise the connection pool size and enable retry with exponential backoff."},
+  {"source_id": "DOC-002", "title": "Web Portal Browser Support", "uri": "https://example.invalid/docs/portal-browsers",
+   "product": "web-portal", "version": "1.8", "updated_at": "2025-11-02",
+   "excerpt": "Safari 17 is supported from portal version 1.9; earlier versions may render blank pages."}
+]

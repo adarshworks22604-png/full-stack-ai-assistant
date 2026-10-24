@@ -1,0 +1,6 @@
+{
+  "name": "outlook-engineering-ai-assistant-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Outlook task pane (React + TypeScript). Dependencies added in Stage 2."
+}
