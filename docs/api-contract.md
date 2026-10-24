@@ -24,13 +24,21 @@ Request IDs are generated server-side. User identity comes from validated tokens
 |---|---|---|
 | request.started | request_id, status | Create response card |
 | assistant.delta | request_id, text | Append partial (preliminary) text |
-| tool.status | tool, status, safe summary | Show progress |
+| tool.status | request_id, tool, status (running/done/failed), summary | Show progress |
 | evidence.ready | source ids/titles, safe metadata | Show evidence chips |
-| assistant.final | answer, sources, request_id | Replace preliminary answer |
-| request.error | error_code, retryable | Show error + retry |
+| assistant.final | request_id, answer, sources, limitations? | Replace preliminary answer; show limitations |
+| request.error | request_id, error_code, message (safe, user-facing), retryable | Show error; offer retry only if retryable |
 | request.done | request_id | Stop indicators |
 
 Never include stack traces, credentials, raw internal responses or unredacted email in events.
 
 ## Evidence model
 `source_id, source_type ("bug"|"documentation"), title, uri?, excerpt, metadata{product, version, status, updated_at}`
+
+## Frontend handling rules (implemented in Stage 2)
+- Events for a different `request_id` are ignored; events before `request.started` are ignored.
+- `assistant.final` ends the request. A later `request.done` is a no-op.
+- `request.done` with no `assistant.final`, or the stream closing early, is a retryable failure.
+- Error codes: RATE_LIMITED, UPSTREAM_TIMEOUT, LLM_UNAVAILABLE, UNAUTHORIZED, INVALID_REQUEST, INTERNAL_ERROR
+  (server) and STREAM_DISCONNECTED, STREAM_ENDED_EARLY (client-detected).
+- Source links render only for http(s) URLs; answers render as plain text, never HTML.
