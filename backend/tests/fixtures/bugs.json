@@ -1,6 +1,0 @@
-[
-  {"id": "BUG-4821", "title": "Payment service times out under load", "status": "Resolved", "affected_version": "2.3.1",
-   "resolution": "Increase connection pool size and add retry with backoff (fixed in 2.3.2).", "product": "payments"},
-  {"id": "BUG-1002", "title": "Login page renders blank on Safari", "status": "Open", "affected_version": "1.8.0",
-   "resolution": null, "product": "web-portal"}
-]
