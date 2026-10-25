@@ -21,13 +21,23 @@ function devHttps() {
   return undefined;
 }
 
-export default defineConfig({
-  plugins: [react()],
-  server: { port: 3000, https: devHttps() },
-  test: {
-    environment: "jsdom",
-    globals: true,
-    setupFiles: ["./tests/setup.ts"],
-    css: false,
-  },
+export default defineConfig(({ command }) => {
+  const https = command === "serve" ? devHttps() : undefined;
+  if (command === "serve" && !process.env.VITEST && !https) {
+    console.warn(
+      "\n[vite] No dev certificates found. Outlook needs HTTPS.\n" +
+        "Run: npx office-addin-dev-certs install\n",
+    );
+  }
+
+  return {
+    plugins: [react()],
+    server: { port: 3000, strictPort: true, https },
+    test: {
+      environment: "jsdom",
+      globals: true,
+      setupFiles: ["./tests/setup.ts"],
+      css: false,
+    },
+  };
 });
