@@ -4,5 +4,8 @@
    "excerpt": "If requests time out under load, raise the connection pool size and enable retry with exponential backoff."},
   {"source_id": "DOC-002", "title": "Web Portal Browser Support", "uri": "https://example.invalid/docs/portal-browsers",
    "product": "web-portal", "version": "1.8", "updated_at": "2025-11-02",
-   "excerpt": "Safari 17 is supported from portal version 1.9; earlier versions may render blank pages."}
+   "excerpt": "Safari 17 is supported from portal version 1.9; earlier versions may render blank pages."},
+  {"source_id": "DOC-003", "title": "Billing Export Guide", "uri": "https://example.invalid/docs/billing-export",
+   "product": "billing", "version": "4.0", "updated_at": "2026-02-20",
+   "excerpt": "Large invoice exports should be streamed in pages to avoid dropped rows."}
 ]

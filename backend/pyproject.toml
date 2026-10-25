@@ -3,7 +3,40 @@ name = "outlook-engineering-ai-assistant-backend"
 version = "0.1.0"
 description = "FastAPI backend for the Outlook Engineering AI Assistant"
 requires-python = ">=3.11"
-dependencies = []  # added in Stage 3; pin with a lockfile
+dependencies = [
+  "fastapi",
+  "uvicorn",
+  "pydantic-settings",
+  "httpx",
+  "PyJWT[crypto]",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-asyncio", "ruff", "mypy"]
+
+# Exact versions are pinned in requirements.txt / requirements-dev.txt (the lockfile equivalents).
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+asyncio_mode = "auto"
+pythonpath = ["."]
+filterwarnings = ["error::RuntimeWarning"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "S", "ASYNC"]
+ignore = ["S101"]  # asserts document invariants guaranteed by config validation
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["fastapi.Depends", "fastapi.Path"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S105", "S106", "S311"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+plugins = ["pydantic.mypy"]
